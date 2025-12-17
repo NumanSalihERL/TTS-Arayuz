@@ -14,7 +14,7 @@ btn.addEventListener("click", async () => {
         return;
     }
 
-    /*RESET UI*/
+    //RESET UI
     loading.style.display = "flex";
     audio.style.display = "none";
     info.style.display = "none";
@@ -22,7 +22,7 @@ btn.addEventListener("click", async () => {
     downloadMp3.style.display = "none";
     btn.disabled = true;
 
-     /*API YAZILACAK YER*/
+     //API YAZILACAK YER
     try {
         const response = await fetch("api-url yazcaz", {
             method: "POST",
@@ -35,7 +35,7 @@ btn.addEventListener("click", async () => {
         const blob = await response.blob();
         const audioUrl = URL.createObjectURL(blob);
 
-        /*GENERATE BİTTİ*/
+        //GENERATE BİTTİ
         loading.style.display = "none";
 
         audio.src = audioUrl;
