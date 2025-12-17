@@ -14,11 +14,29 @@
 
     <button id="btn">GENERATE VOICE</button>
 
-    <audio id="audio" controls hidden></audio>
+    <!--Loading-->
+    <div id="loading">
+        <div class="spinner"></div>
+        <p>Generating audio...</p>
+    </div>
 
-    <a id="download" hidden download="tts-audio.wav">Download Audio</a>
+    <!--Info-->
+    <div id="info">
+        <p id="duration"></p>
+        <p id="size"></p>
+    </div>
+
+    <!--Audio-->
+    <audio id="audio" controls></audio>
+
+    <!--Downloads-->
+    <a id="download-wav">Download WAV</a>
+    <a id="download-mp3">Download MP3</a>
+
 </div>
 
+<script src="https://unpkg.com/lamejs@1.2.0/lame.min.js"></script>
 <script src="script.js"></script>
+
 </body>
 </html>
