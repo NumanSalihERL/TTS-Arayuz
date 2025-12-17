@@ -1,4 +1,8 @@
-document.getElementById("btn").addEventListener("click", async () => {
+const btn = document.getElementById("btn");
+const audio = document.getElementById("audio");
+const download = document.getElementById("download");
+
+btn.addEventListener("click", async () => {
     const text = document.getElementById("text").value;
 
     if (!text.trim()) {
@@ -6,24 +10,31 @@ document.getElementById("btn").addEventListener("click", async () => {
         return;
     }
 
+    audio.hidden = true;
+    download.hidden = true;
+
     try {
-        const response = await fetch("BACKEND_URL_HERE/tts", {
+        const response = await fetch("api-url yazcaz", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ text: text })
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text })
         });
 
         if (!response.ok) {
             throw new Error("Server error");
         }
 
-        const audioBlob = await response.blob();
-        document.getElementById("audio").src = URL.createObjectURL(audioBlob);
+        const blob = await response.blob();
+        const audioUrl = URL.createObjectURL(blob);
 
-    } catch (error) {
-        alert("Failed to generate voice.");
-        console.error(error);
+        audio.src = audioUrl;
+        audio.hidden = false;
+
+        download.href = audioUrl;
+        download.hidden = false;
+
+    } catch (err) {
+        alert("Audio generation failed.");
+        console.error(err);
     }
 });
